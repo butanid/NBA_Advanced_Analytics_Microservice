@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Player Analysis</title>
+    <style>
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul a {
+            margin-right: 20px; /* Adjust the value as needed for spacing */
+            text-decoration: none;
+            color: #007BFF;
+        }
+        nav ul a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <a href="http://127.0.0.1:5008/">Home</a>
+            <a href="http://127.0.0.1:5002/">Team Analysis</a>
+            <a href="http://127.0.0.1:5003">Player Analysis</a>
+            <a href="http://127.0.0.1:5004">Stat Correlation</a>
+            <a href="http://127.0.0.1:5005">Regular vs Playoff Analysis</a>
+            <a href="http://127.0.0.1:5007">Image Generator</a>
+        </ul>
+    </nav>
+    <h1>NBA Player Analysis</h1>
+    <p>This advanced analytics tool allows you to input a player and filter within a specific date range in years.</p>
+    <p>It then outputs that player's statistical averages for each recorded category within that time frame.</p>
+    <form action="/analyze_player_stats" method="POST">
+        <label for="player">Enter Player Name:</label>
+        <input type="text" id="player" name="player" required><br><br>
+        <label for="start_year">Enter Start Year:</label>
+        <input type="number" id="start_year" name="start_year" required><br><br>
+        <label for="end_year">Enter End Year:</label>
+        <input type="number" id="end_year" name="end_year" required><br><br>
+        <input type="submit" value="Generate Results">
+    </form><br>
+    {% if player_name %}
+        <h1>Player Analysis Results</h1>
+        <h2>{{ player_name }}'s Statistical Averages from {{ start_year }} to {{ end_year }}</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Averages</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category, average in player_mean.items() %}
+                <tr>
+                    <td>{{ category }}</td>
+                    <td>{{ average }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Image Generator</title>
+    <style>
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul a {
+            margin-right: 20px; /* Adjust the value as needed for spacing */
+            text-decoration: none;
+            color: #007BFF;
+        }
+        nav ul a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <a href="http://127.0.0.1:5008/">Home</a>
+            <a href="http://127.0.0.1:5002/">Team Analysis</a>
+            <a href="http://127.0.0.1:5003">Player Analysis</a>
+            <a href="http://127.0.0.1:5004">Stat Correlation</a>
+            <a href="http://127.0.0.1:5005">Regular vs Playoff Analysis</a>
+            <a href="http://127.0.0.1:5007">Image Generator</a>
+        </ul>
+    </nav>
+    <h1>NBA Image Generator</h1>
+    <p>This tool allows you to input a team abbreviation or a player.</p>
+    <p>It then generates the respective team logo or player headshot.</p>
+    <form action="/generate_image" method="POST">
+        <label for="team_abbreviation">Enter Team Abbreviation:</label>
+        <input type="text" id="team_abbreviation" name="team_abbreviation">
+        <input type="submit" value="Get Team Logo"><br><br>
+    </form>
+    <form action="/generate_image" method="POST">
+        <label for="player_name">Enter Player Name:</label>
+        <input type="text" id="player_name" name="player_name">
+        <input type="submit" value="Get Player Headshot">
+    </form>
+</body>
+</html>

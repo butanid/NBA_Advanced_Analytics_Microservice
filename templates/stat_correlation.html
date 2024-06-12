@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Stat Correlation</title>
+    <style>
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul a {
+            margin-right: 20px; /* Adjust the value as needed for spacing */
+            text-decoration: none;
+            color: #007BFF;
+        }
+        nav ul a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <a href="http://127.0.0.1:5008/">Home</a>
+            <a href="http://127.0.0.1:5002/">Team Analysis</a>
+            <a href="http://127.0.0.1:5003">Player Analysis</a>
+            <a href="http://127.0.0.1:5004">Stat Correlation</a>
+            <a href="http://127.0.0.1:5005">Regular vs Playoff Analysis</a>
+            <a href="http://127.0.0.1:5007">Image Generator</a>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Stat Correlation</h1>
+        <p>This advanced analytics tool allows you to input a player and filter within a specific date range in years.</p>
+        <p>It then outputs that player's statistical correlation displayed in the form of a heat map for each recorded category within that time frame.</p>
+        <form id="correlation-form">
+            <label for="player">Enter Player Name:</label>
+            <input type="text" id="player" name="player" required><br><br>
+            <label for="start_year">Enter Start Year:</label>
+            <input type="number" id="start_year" name="start_year" required><br><br>
+            <label for="end_year">Enter End Year:</label>
+            <input type="number" id="end_year" name="end_year" required><br><br>
+            <button type="submit">Get Correlation</button>
+        </form>
+        <div id="heatmap"></div>
+    </div>
+    <script>
+        document.getElementById('correlation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const player = document.getElementById('player').value;
+            const startYear = document.getElementById('start_year').value;
+            const endYear = document.getElementById('end_year').value;
+
+            fetch(`/correlation?player=${player}&start_year=${startYear}&end_year=${endYear}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        const heatmap = document.getElementById('heatmap');
+                        heatmap.innerHTML = `<img src="data:image/png;base64,${data.image}" alt="Heatmap">`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>

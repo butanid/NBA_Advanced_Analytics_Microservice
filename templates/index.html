@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Advanced Analytics App</title>
+    <style>
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul a {
+            margin-right: 20px; /* Adjust the value as needed for spacing */
+            text-decoration: none;
+            color: #007BFF;
+        }
+        nav ul a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to my NBA Advanced Analytics App</h1>
+    <p>
+        This application provides various statistical insights for NBA teams and it's players. Click one of the links below to begin!
+    </p>
+    <nav>
+        <ul>
+            {% for service, url in services.items() %}
+                <a href="{{ url_for('redirect_to_service', service=service) }}">{{ service.replace('_', ' ').title() }}</a>
+            {% endfor %}
+        </ul>
+    </nav>
+</body>
+</html>

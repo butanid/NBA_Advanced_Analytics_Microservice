@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NBA Regular Season vs Playoffs</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul a {
+            margin-right: 20px; /* Adjust the value as needed for spacing */
+            text-decoration: none;
+            color: #007BFF;
+        }
+        nav ul a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <a href="http://127.0.0.1:5008/">Home</a>
+            <a href="http://127.0.0.1:5002/">Team Analysis</a>
+            <a href="http://127.0.0.1:5003">Player Analysis</a>
+            <a href="http://127.0.0.1:5004">Stat Correlation</a>
+            <a href="http://127.0.0.1:5005">Regular vs Playoff Analysis</a>
+            <a href="http://127.0.0.1:5007">Image Generator</a>
+        </ul>
+    </nav>
+    <h1>NBA Regular Season vs Playoffs Stat Comparison</h1>
+    <p>This advanced analytics tool allows you to input a player and filter within a specific date range in years.</p>
+    <p>It then outputs that player's statistical comparison in the form of a graph for each recorded category within that time frame.</p>
+    <form action="/comparison" method="get">
+        <label for="player">Enter Player Name:</label>
+        <input type="text" id="player" name="player" required><br><br>
+        <label for="start_year">Enter Start Year:</label>
+        <input type="text" id="start_year" name="start_year"><br><br>
+        <label for="end_year">Enter End Year:</label>
+        <input type="text" id="end_year" name="end_year"><br><br>
+        <input type="submit" value="Compare">
+    </form>
+    
+    <div>{{ graph_html | safe }}</div>
+
+</body>
+</html>
